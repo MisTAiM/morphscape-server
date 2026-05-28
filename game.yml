@@ -1,0 +1,49 @@
+# Black Bulls Den RSPS
+name: "Black Bulls Den"
+game-port: 43594
+revision: 180
+
+# Home location (Lumbridge)
+home-x: 3222
+home-z: 3218
+
+# Privileges
+privileges:
+  - id: 0
+    icon: 0
+    name: "player"
+    powers: []
+  - id: 1
+    icon: 1
+    name: "moderator"
+    powers: ["mod"]
+  - id: 2
+    icon: 2
+    name: "administrator"
+    powers: ["mod", "admin"]
+  - id: 3
+    icon: 2
+    name: "owner"
+    powers: ["mod", "dev", "admin", "owner"]
+
+services:
+  - className: gg.rsmod.game.service.rsa.RsaService
+    path: ./data/rsa/key.pem
+    radix: 16
+    bit-count: 2048
+
+  - className: gg.rsmod.game.service.GameService
+    exp-rate: 10.0
+    exp-multiplier: 1.0
+    npc-clip: true
+    send-chunk: 5
+
+  - className: gg.rsmod.game.service.serializer.JsonPlayerSerializer
+    path: ./data/saves/
+
+  - className: gg.rsmod.game.service.xtea.XteaKeyService
+    path: ./data/xteas/
+
+api:
+  services:
+    - className: gg.rsmod.api.osrs.OsrsApiService
